@@ -1,33 +1,78 @@
-const app = {
-  isOpen: false,
-};
+// VisibilityToggle - render, constructor, handleToggleVisibility
+// visibility -> false
 
-const onButtonClick = () => {
-  app.isOpen = !app.isOpen;
+class VisibilityToggle extends React.Component {
+  constructor(props) {
+    super(props);
 
-  render();
-};
+    this.handleToggleVisibility = this.handleToggleVisibility.bind(this);
 
-const appRoot = document.getElementById('app');
+    this.state = {
+      visibility: false,
+    };
+  }
 
-const render = () => {
-  const template = (
-    <div className="VisibilityToggle">
-      <h1>Visibility Toggle</h1>
+  handleToggleVisibility() {
+    this.setState((prevState) => {
+      return {
+        visibility: !prevState.visibility,
+      };
+    });
+  }
 
-      <button onClick={onButtonClick}>
-        { app.isOpen ? 'Hide details' : 'Show details'}
-      </button>
+  render() {
+    const { visibility } = this.state;
 
-      {(app.isOpen)
-        && (
-          <p>Hey. These are some details you can now see!</p>
-        )
-      }
-    </div>
-  );
+    return (
+      <div>
+        <h1>Visibility Toggle</h1>
 
-  ReactDOM.render(template, appRoot);
-};
+        <button onClick={this.handleToggleVisibility}>
+          {visibility ? 'Hide details' : 'Show details'}
+        </button>
 
-render();
+        {visibility && (
+          <div>
+            <p>Hey. These are some details you can now see!</p>
+          </div>
+        )}
+      </div>
+    );
+  };
+}
+
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
+
+// const app = {
+//   isopen: false,
+// };
+
+// const onbuttonclick = () => {
+//   app.isopen = !app.isopen;
+
+//   render();
+// };
+
+// const approot = document.getelementbyid('app');
+
+// const render = () => {
+//   const template = (
+//     <div classname="visibilitytoggle">
+//       <h1>visibility toggle</h1>
+
+//       <button onclick={onbuttonclick}>
+//         { app.isopen ? 'hide details' : 'show details'}
+//       </button>
+
+//       {(app.isopen)
+//         && (
+//           <p>hey. these are some details you can now see!</p>
+//         )
+//       }
+//     </div>
+//   );
+
+//   reactdom.render(template, approot);
+// };
+
+// render();
